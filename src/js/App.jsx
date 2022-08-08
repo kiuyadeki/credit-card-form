@@ -1,15 +1,13 @@
 import React, {useState} from 'react';
 import "../css/main.scss";
-import {InputTodo} from '../components/InputTodo.jsx';
-import {IncompleteTodos} from '../components/IncompleteTodos.jsx';
-import {CompleteTodos} from '../components/CompleteTodos.jsx';
-import { InputFurigana } from '../components/Furigana.jsx';
+import pic from '../images/6.jpeg';
 
 export const App = () => {
   const [todoText, setTodoText] = useState('');
   const [incompleteTodos, setIncompleteTodos] = useState(['aaaaa', 'iiiiiii']);
   const [completeTodos, setCompleteTodos] = useState(['uuuu', 'eee'])
   const [furigana, setFurigana] = useState('');
+  const [number, setNumber] = useState('');
 
   const onChangeTodoText = (event) => {
     setTodoText(event.target.value);
@@ -52,28 +50,35 @@ export const App = () => {
     return katakana;
   }
 
+  const insertCardNumberSeparator = (num) => {
+    return num.match(/\d{1,4}/g).join(' ');
+  }
+
+
+  const validateNumber = (e) => {
+    let inputValue = e.target.value.replace(/ /g, '');
+    const maxLength = 16;
+    const inputPattern = '^[0-9]*$';
+    if (RegExp(inputPattern).test(inputValue) && inputValue.length <= maxLength) {
+      const displayValue = inputValue.length ? insertCardNumberSeparator(inputValue) : inputValue;
+      setNumber(displayValue);
+    }
+  }
+
 
   return (
     <>
-      <InputTodo
-        todoText={todoText}
-        onChange={onChangeTodoText}
-        onClick={onClickAdd}
-        disabled={incompleteTodos.length >= 5}
-      />
-      <InputFurigana
-        furigana={furigana}
-      />
-      {incompleteTodos.length >= 5 && <p style={{color: 'red'}}>max 5 todo</p>}
-      <IncompleteTodos
-        todos={incompleteTodos}
-        onClickComplete={onClickComplete}
-        onClickDelete={onClickDelete}
-      />
-      <CompleteTodos
-        todos={completeTodos}
-        onClickIncomplete={onClickIncomplete}
-      />
+      <form action="" method='post'>
+        <div className='card-item'>
+          <div className="card-item__side -front">
+            <div className="card-item__cover">
+              <img src={pic} alt="" />
+            </div>
+          </div>
+          <div className="card-item__side -back"></div>
+        </div>
+        <input type="text" onChange={validateNumber} value={number}/>
+      </form>
     </>
   );
 };
