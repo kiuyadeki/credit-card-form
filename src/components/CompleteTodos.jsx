@@ -1,7 +1,7 @@
 import React from "react";
 
 export const CompleteTodos = (props) => {
-  const {todos, onClickIncomplete} = props;
+  const { todos, onClickIncomplete } = props;
   return (
     <div className="complete-area">
       <p className="title">完了済のTODO</p>
@@ -12,9 +12,9 @@ export const CompleteTodos = (props) => {
               <li>{todo}</li>
               <button onClick={() => onClickIncomplete(index)}>戻す</button>
             </div>
-          )
+          );
         })}
       </ul>
     </div>
-  )
-}
+  );
+};

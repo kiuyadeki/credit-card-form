@@ -18,4 +18,4 @@ export const IncompleteTodos = (props) => {
       </ul>
     </div>
   );
-}
+};

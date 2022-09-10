@@ -86,7 +86,7 @@ module.exports = {
   plugins: [
     new ESLintPlugin({
       extensions: [".js"],
-      exclude: "node_modules",
+      exclude: ["node_modules", "dist"],
     }),
     new MiniCssExtractPlugin({
       filename: "./css/[name]-[contenthash].css",
