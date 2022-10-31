@@ -6,7 +6,8 @@ import visa from "../images/visa.png";
 
 export const App = () => {
   const [number, setNumber] = useState("");
-  const [cardHolders, setCardHolders] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+
   const expirationMonthURL = "http://myjson.dit.upm.es/api/bins/e2q0";
   const expirationYearURL = "http://myjson.dit.upm.es/api/bins/isjw";
   const [expirationMonth, setExpirationMonth] = useState([]);
@@ -43,6 +44,15 @@ export const App = () => {
     }
   };
 
+  const displayCardNumber = (e) => {
+    const numArg = e.target.value.split("");
+    const numDOM = numArg.map((num, key) => {
+      return <span key={key}>{num}</span>
+    })
+    setCardNumber(numDOM);
+  }
+
+
   const displaycaldHolders = () => {};
 
   return (
@@ -51,9 +61,51 @@ export const App = () => {
         <form className="card-form" action="" method="post">
           <div className="card-item">
             <div className="card-item__side -front">
-              <div className="card-item__wrapp">
+              <div className="card-item__wrap">
                 <div className="card-item__top">
                   <img src={chip} alt="" />
+                  <img src={visa} alt="" />
+                </div>
+                <div className="card-item__number">
+                  <label htmlFor="cardNumber">
+                    {/* {cardNumber.map((num, key) => {
+                      return <span key={key}>{num}</span>;
+                    })} */}
+                    {cardNumber}
+                    <span>#</span>
+                    <span>#</span>
+                    <span>#</span>
+                    <span>#</span>
+                    <span className="-spacer"></span>
+                    <span>#</span>
+                    <span>#</span>
+                    <span>#</span>
+                    <span>#</span>
+                    <span className="-spacer"></span>
+                    <span>#</span>
+                    <span>#</span>
+                    <span>#</span>
+                    <span>#</span>
+                    <span className="-spacer"></span>
+                    <span>#</span>
+                    <span>#</span>
+                    <span>#</span>
+                    <span>#</span>
+                  </label>
+                </div>
+                <div className="card-item__bottom">
+                  <label htmlFor="cardHolders">
+                    <span className="card-item__title">Card Holder</span>
+                    <div className="card-item__name">FULL NAME</div>
+                  </label>
+                  <div className="card-item__date">
+                    <label htmlFor="expirationMonth" className="card-item__title">Expires</label>
+                    <div className="card-item__date__inner">
+                      <label htmlFor="expirationMonth">MM</label>
+                      /
+                      <label htmlFor="expirationYear">YY</label>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="card-item__cover">
@@ -72,12 +124,15 @@ export const App = () => {
               <input
                 id="cardNumber"
                 type="text"
-                onChange={validateNumber}
+                onChange = {(num) => {
+                  validateNumber(num);
+                  displayCardNumber(num);
+                }}
                 value={number}
               />
             </div>
             <div className="form-inner__box">
-              n <label htmlFor="cardHolders">Card Holders</label>
+              <label htmlFor="cardHolders">Card Holders</label>
               <input
                 id="cardHolders"
                 type="text"

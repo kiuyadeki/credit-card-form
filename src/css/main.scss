@@ -28,11 +28,61 @@ img {
     margin: auto;
     width: 100%;
   }
-  &-item {
-    max-width: 430px;
-    margin-inline: auto;
+}
+
+.card-item {
+  max-width: 430px;
+  margin-inline: auto;
+  label {
+    cursor: pointer;
   }
-  &-item__cover img {
+  &__side {
+    position: relative;
+  }
+  &__wrap {
+    position: absolute;
+    inset: 0;
+    padding: 25px 30px;
+    text-shadow: 7px 6px 10px rgb(14 42 90 / 80%);
+  }
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    img {
+      height: 50px;
+    }
+  }
+  &__number {
+    color: #fff;
+    margin-top: 40px;
+    font-size: 30px;
+    letter-spacing: .1em;
+    text-align: center;
+    span {
+      display: inline-block;
+      &.-spacer {
+        width: 20px;
+      }
+    }
+  }
+  &__bottom {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    letter-spacing: 0.1em;
+  }
+  &__title {
+    font-size: 13px;
+    opacity: 0.7;
+  }
+  &__name {
+    font-size: 18px;
+  }
+  &__date {
+    font-size: 18px;
+  }
+  &__cover img {
     border-radius: 14px;
   }
 }
