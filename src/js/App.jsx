@@ -8,26 +8,10 @@ export const App = () => {
   const [number, setNumber] = useState("");
   const [cardNumber, setCardNumber] = useState("");
 
-  const expirationMonthURL = "http://myjson.dit.upm.es/api/bins/e2q0";
-  const expirationYearURL = "http://myjson.dit.upm.es/api/bins/isjw";
-  const [expirationMonth, setExpirationMonth] = useState([]);
-  const [expirationYear, setExpirationYear] = useState([]);
-  useEffect(() => {
-    fetch(expirationMonthURL, { method: "GET" })
-      .then((response) => response.json())
-      .then((data) => {
-        setExpirationMonth(data);
-      });
-  }, []);
-  useEffect(() => {
-    fetch(expirationYearURL, { method: "GET" })
-      .then((response) => response.json())
-      .then((data) => setExpirationYear(data));
-  });
-
   const insertCardNumberSeparator = (num) => {
     return num.match(/\d{1,4}/g).join(" ");
   };
+
 
   const validateNumber = (e) => {
     let inputValue = e.target.value.replace(/ /g, "");
@@ -46,9 +30,19 @@ export const App = () => {
 
   const displayCardNumber = (e) => {
     const numArg = e.target.value.split("");
-    const numDOM = numArg.map((num, key) => {
-      return <span key={key}>{num}</span>
-    })
+    const cardNumberLength = 16;
+    let numDOM = [];
+    for (let i = 0; i <= cardNumberLength; i++ ) {
+      if ( RegExp("^[0-9]*$").test(numArg[i]) ) {
+        numDOM[i] = <span key={i}>{numArg[i]}</span>;
+      } else {
+        numDOM[i] = <span key={i}>#</span>;
+      }
+      if (!numDOM[i]) {
+        numDOM = numDOM.splice(i, 1);
+      }
+    }
+    console.log(numArg, numDOM);
     setCardNumber(numDOM);
   }
 
@@ -72,12 +66,7 @@ export const App = () => {
                       return <span key={key}>{num}</span>;
                     })} */}
                     {cardNumber}
-                    <span>#</span>
-                    <span>#</span>
-                    <span>#</span>
-                    <span>#</span>
-                    <span className="-spacer"></span>
-                    <span>#</span>
+                    {/* <span>#</span>
                     <span>#</span>
                     <span>#</span>
                     <span>#</span>
@@ -91,6 +80,11 @@ export const App = () => {
                     <span>#</span>
                     <span>#</span>
                     <span>#</span>
+                    <span className="-spacer"></span>
+                    <span>#</span>
+                    <span>#</span>
+                    <span>#</span>
+                    <span>#</span> */}
                   </label>
                 </div>
                 <div className="card-item__bottom">
@@ -150,9 +144,18 @@ export const App = () => {
                   <option value="month" disabled>
                     Month
                   </option>
-                  {expirationMonth.map((date, index) => {
-                    return <option key={index}>{date.number}</option>;
-                  })}
+                  <option>01</option>
+                  <option>02</option>
+                  <option>03</option>
+                  <option>04</option>
+                  <option>05</option>
+                  <option>06</option>
+                  <option>07</option>
+                  <option>08</option>
+                  <option>09</option>
+                  <option>10</option>
+                  <option>11</option>
+                  <option>12</option>
                 </select>
                 <select
                   name="expirationYear"
@@ -162,9 +165,18 @@ export const App = () => {
                   <option value="year" disabled>
                     Year
                   </option>
-                  {expirationYear.map((date, index) => {
-                    return <option key={index}>{date.number}</option>;
-                  })}
+                  <option>2022</option>
+                  <option>2023</option>
+                  <option>2024</option>
+                  <option>2025</option>
+                  <option>2026</option>
+                  <option>2027</option>
+                  <option>2028</option>
+                  <option>2029</option>
+                  <option>2030</option>
+                  <option>2031</option>
+                  <option>2032</option>
+                  <option>2033</option>
                 </select>
               </div>
               <div className="form-inner__col -cvv">
